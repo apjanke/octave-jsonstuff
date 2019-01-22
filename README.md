@@ -4,10 +4,9 @@ Chrono for GNU Octave
 | WARNING: All the code in here is currently in the alpha stage. (Pre-beta, that is.) Do not use it in any production or business code! Seriously!! |
 | ---- |
 
-JSON encode/decode functionality for GNU Octave.
+JSON encoding/decoding functionality for GNU Octave.
 
-This package attempts to provide a set of Matlab-compatible JSON encoding and decoding
-functions, namely `jsonencode` and `jsondecode`.
+This package attempts to provide a set of Matlab-compatible JSON encoding and decoding functions, namely `jsonencode` and `jsondecode`.
 
 
 ## Installation and usage
@@ -31,7 +30,7 @@ pkg load jsonstuff
 
 ## Requirements
 
-* Octave
+* Octave 4.4 or newer
 * `jsoncpp` library
 
 JsonStuff runs on Octave 4.4.0 and later. It would be nice to have it work on Octave 4.0.0
@@ -56,6 +55,8 @@ brew install jsoncpp
 
 The user documentation is in the `doc/` directory. See `doc/jsonstuff.html` or `doc/html/index.html` for
 the manual.
+
+There's a [FAQ](doc-project/FAQ.md) in `doc-project/`.
 
 The developer documentation (for people hacking on JsonStuff itself) is in `doc-project/`. Also see
 [CONTRIBUTING](CONTRIBUTING.md) if you would like to contribute to this project.
