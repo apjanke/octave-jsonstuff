@@ -200,8 +200,10 @@ check: $(install_stamp)
 
 .PHONY: local doc clean-local
 
-local: src/*.cc __jsonstuff_make_local__.m
-	$(OCTAVE) --eval="__jsonstuff_make_local__"
+# This used to call __jsonstuff_make_local__.m
+local: src/*.cc 
+	cd src && make all
+	cp src/*.oct inst
 
 doc:
 	cd doc && make all
