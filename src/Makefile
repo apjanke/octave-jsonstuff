@@ -12,10 +12,11 @@ ifeq ($(UNAME_S),Linux)
 	export CXXFLAGS := $(CXXFLAGS) -std=gnu++14
 endif
 
-# TODO: Replace this hardcoded file list with a pattern-generated
-# one based on *.cc
+OCT_SOURCES = $(wildcard *.cc)
+OCT_FILES = $(patsubst %.cc,%.oct,$(OCT_SOURCES))
+
 .PHONY: all
-all: __jsonstuff_jsondecode_oct__.oct
+all: $(OCT_FILES)
 
 %.oct: %.cc
 	echo MKOCT_CPPFLAGS: $(MKOCT_CPPFLAGS)
