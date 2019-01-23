@@ -30,8 +30,9 @@ pkg load jsonstuff
 
 ## Requirements
 
-* Octave 4.4 or newer
-* `jsoncpp` library
+* Octave 4.2 or newer
+* `jsoncpp` library 1.x or newer
+* Linux or macOS (not Windows), for now
 
 JsonStuff runs on Octave 4.4.0 and later. It would be nice to have it work on Octave 4.0.0
 and later (since Ubuntu 16 Xenial has Octave 4.0 and Ubuntu 18 Bionic has Octave 4.2); maybe we'll do that.
@@ -50,6 +51,8 @@ On macOS with Homebrew installed:
 ```
 brew install jsoncpp
 ```
+
+You need `jsoncpp` 1.x or newer. On Ubuntu, that means Ubuntu 16.04 Xenial or later is required; 14.04 Trusty's jsoncpp is too old.
 
 ## Documentation
 

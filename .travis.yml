@@ -27,10 +27,7 @@ matrix:
   include:
     - os: linux
       dist: xenial
-      env: dist="Xenial"
-    - os: linux
-      dist: trusty
-      env: dist="Trusty"
+      env: dist="Xenial 16.x"
     - os: osx
       osx_image: xcode10.1
     - os: osx
