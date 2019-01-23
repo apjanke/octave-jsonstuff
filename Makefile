@@ -59,6 +59,7 @@ endif
 ## to not display it (makes specially sense for echo).
 help:
 	@echo "Targets:"
+	@echo "   local   - Build octfiles int local inst/ directory"
 	@echo "   dist    - Create $(release_tarball) for release."
 	@echo "   html    - Create $(html_tarball) for release."
 	@echo "   release - Create both of the above and show md5sums."
@@ -214,7 +215,7 @@ doc:
 ##
 
 clean-local:
-	rm -f inst/*.oct
+	rm -f inst/*.oct src/*.oct src/*.o
 
 clean-unpacked-release:
 	-$(RM) -r $(release_dir) $(html_dir)
