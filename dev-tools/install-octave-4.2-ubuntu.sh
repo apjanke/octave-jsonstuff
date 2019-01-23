@@ -7,5 +7,6 @@ if grep -i 'xenial\|trusty' /etc/lsb-release &>/dev/null; then
   echo $0: Adding apt repository ppa:octave/stable to get newer Octave 4.2
   sudo add-apt-repository ppa:octave/stable --yes
 fi
-pkgs="octave liboctave-dev octave-pkg-dev"
-sudo apt-get install $pkgs
+pkgs="octave liboctave-dev"
+echo $0: Installing packages: $pkgs
+sudo apt-get install --yes $pkgs
