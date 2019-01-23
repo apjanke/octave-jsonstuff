@@ -38,16 +38,18 @@ matrix:
     - os: osx
       osx_image: xcode10
 
-script:
+install:
+  # Install Octave 4.2, even if it's not the default
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./dev-tools/install-octave-4.2-ubuntu.sh; fi
   - which octave
   - octave --version
+
+script:
   - make local
   # We only build the docs on Linux because it requires TeX and the macOS TeX install is a monster.
   # We only need the doc build for verifying doc changes anyway; we don't need multi-platform
   # artifacts, or even the new artifacts at all.
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then (cd doc && make maintainer-clean && make all); fi
-  # Upgrade to Octave 4.2
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./dev-tools/install-octave-4.2-ubuntu.sh; fi
   - make test
   - make dist
   - octave --eval "pkg install ./target/jsonstuff-0.1.0.tar.gz"
