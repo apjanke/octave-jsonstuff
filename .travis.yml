@@ -17,11 +17,13 @@ addons:
       - octave-pkg-dev
       - qttools5-dev-tools
       - libqt5sql5-sqlite
+      - libjsoncpp-dev
   homebrew:
     packages:
       - octave
       - qt
       - findutils
+      - jsoncpp
 
 matrix:
   include:
