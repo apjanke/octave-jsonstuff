@@ -52,3 +52,4 @@ script:
   - octave --eval "pkg load jsonstuff; pkg unload jsonstuff"
   - octave --eval "pkg load jsonstuff; runtests ./inst"
   - octave --eval "pkg uninstall jsonstuff"
+  - ./dev-tools/runtests.sh
