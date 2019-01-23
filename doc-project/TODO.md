@@ -6,6 +6,7 @@ JsonStuff TODO
 * Get building and running on Windows
 * Fix build on Ubuntu
   * Need to include `<jsoncpp/json/json.h>` instead of just `<json/json.h>`
+  * Get compiling on older Ubuntus: Trusty and Xenial
 * Unify `make local` target and `src/Makefile`
 
 ## Code
@@ -21,7 +22,8 @@ JsonStuff TODO
   * So I can support various encoding/decoding options
 * Maybe [UBJSON](https://en.wikipedia.org/wiki/UBJSON) support
 * Maybe octfile-ify jsonencode, for speed
-
+* Documentation
+  * __octave_link_register_doc__ doesn't work on Octave 4.2. Make PKG_ADD version-sensitive
 
 ## Project
 
