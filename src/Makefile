@@ -8,7 +8,7 @@ LIB_FLAGS=-ljsoncpp
 all: __jsonstuff_jsondecode_oct__.oct
 
 %.oct: %.cc
-	$(MKOCTFILE) $(LIB_FLAGS) $<
+	$(MKOCTFILE) --verbose $(LIB_FLAGS) $<
 
 .PHONY: clean
 clean:
