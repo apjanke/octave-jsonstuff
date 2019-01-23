@@ -11,9 +11,9 @@
 
 set -e
 
+package=$(grep "^Name: " DESCRIPTION | cut -f2 -d' ')
+
 OCTAVE="octave --no-gui --norc"
-#TODO: Read package name from ../DESCRIPTION
-package="jsonstuff"
 
 test_dir="$1"
 
