@@ -46,4 +46,7 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then (cd doc && make maintainer-clean && make all); fi
   - make test
   - make dist
-
+  - octave --eval "pkg install ./target/jsonstuff-0.1.0.tar.gz"
+  - octave --eval "pkg load jsonstuff; pkg unload jsonstuff"
+  - octave --eval "pkg load jsonstuff; runtests ./inst"
+  - octave --eval "pkg uninstall jsonstuff"
