@@ -1,5 +1,6 @@
 *.o
 *.oct
+*.swp
 /target
 /doc/DOCSTRINGS.texi.tmp
 /doc/*.dvi
