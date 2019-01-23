@@ -17,7 +17,7 @@
 ## <https://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} octave_jsonstuff_make_local
+## @deftypefn {Function File} __jsonstuff_make_local__
 ##
 ## Build all the octfiles in JsonStuff.
 ##
@@ -27,18 +27,18 @@
 ##
 ## @end deftypefn
 
-function octave_jsonstuff_make_local
+function __jsonstuff_make_local__
   ## OCTAVE_JSONSTUFF_MAKE_LOCAL Build the octfiles for this repo
   ##
   ## Call this function if you are working with a local copy of this repo instead
   ## of installing it as a package.
   d = dir;
-  if ~ismember('octave_jsonstuff_make_local.m', {d.name})
-    [my_dir,me] = fileparts(mfilename('fullpath'));
-    error(['You are calling this function from the wrong directory.\n' ...
+  if (! ismember ([mfilename '.m'], {d.name}))
+    [my_dir, me] = fileparts (mfilename ('fullpath'));
+    error (['You are calling this function (%s) from the wrong directory.\n' ...
       '%s needs to be run from the directory it lives in.\n' ...
       'cd to %s and try again.'], ...
-      me, my_dir);
+      mfilename, my_dir);
   endif
   octfcns = {
     '__jsonstuff_jsondecode_oct__'
