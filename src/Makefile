@@ -9,7 +9,7 @@ MKOCT_CPPFLAGS =
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	MKOCT_CPPFLAGS += -I/usr/include/jsoncpp
-	export CXXFLAGS := $(CXXFLAGS) -std=gnu++11
+	export CXXFLAGS := $(CXXFLAGS) -std=gnu++14
 endif
 
 # TODO: Replace this hardcoded file list with a pattern-generated
