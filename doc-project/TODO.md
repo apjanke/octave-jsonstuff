@@ -4,6 +4,9 @@ JsonStuff TODO
 ## Big things
 
 * Get building and running on Windows
+* Fix build on Ubuntu
+  * Need to include `<jsoncpp/json/json.h>` instead of just `<json/json.h>`
+* Unify `make local` target and `src/Makefile`
 
 ## Code
 
