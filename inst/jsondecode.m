@@ -35,3 +35,11 @@
 function out = jsondecode (text)
   out = __jsonstuff_jsondecode_oct__ (text);
 endfunction
+
+%!assert (jsondecode ('42'), 42)
+%!assert (jsondecode ('"foobar"'), "foobar")
+%!assert (jsondecode ('[]'), [])
+%!assert (jsondecode ('[1, 2, 3]'), [1 2 3])
+%!assert (jsondecode ('[1, 2, null]'), [1 2 NaN])
+%!assert (jsondecode ('[1, 2, "foo"]'), {1 2 "foo"})
+%!assert (jsondecode ('{"foo": 42, "bar": "hello"'), struct("foo",42, "bar","hello"))

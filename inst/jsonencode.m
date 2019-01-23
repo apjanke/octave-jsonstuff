@@ -358,3 +358,11 @@ function out = isintval (x)
   ## True if x is an integer value, even if held in a double
   out = rem (x, 1) == 0;
 endfunction
+
+
+%!assert (jsonencode (42), "42")
+%!assert (jsonencode ("foo"), '"foo"')
+%!assert (jsonencode ([1 2 3]), '[1, 2, 3]')
+%!assert (jsonencode (NaN), 'null')
+%!assert (jsonencode ([1 2 NaN]), '[1, 2, null]')
+%!assert (jsonencode ({}), "[]")
