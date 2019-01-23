@@ -1,10 +1,14 @@
 MKOCTFILE ?= mkoctfile
 
+LIB_FLAGS=-ljsoncpp
+
+# TODO: Replace this hardcoded file list with a pattern-generated
+# one based on *.cc
 .PHONY: all
 all: __jsonstuff_jsondecode_oct__.oct
 
 %.oct: %.cc
-	$(MKOCTFILE) -ljsoncpp $<
+	$(MKOCTFILE) $(LIB_FLAGS) $<
 
 .PHONY: clean
 clean:

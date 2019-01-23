@@ -40,6 +40,7 @@ function __jsonstuff_make_local__
       'cd to %s and try again.'], ...
       mfilename, my_dir);
   endif
+  ## TODO: Replace this hardcoded list with src/*.cc
   octfcns = {
     '__jsonstuff_jsondecode_oct__'
     };
