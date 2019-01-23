@@ -56,7 +56,6 @@ This manual is for JsonStuff, version @value{VERSION}.
 @menu
 * Introduction::
 * Getting Started::
-* Missing Functionality::
 * Function Reference::
 * Copying::
 @end menu
@@ -98,7 +97,7 @@ available, and you should use those instead.
 
 For development, you can obtain the source code for JsonStuff from the project repo on GitHub at 
 @url{https://github.com/apjanke/octave-jsonstuff}. Upon first installation, run
-the @file{octave_jsonstuff_make_local} script to build the octfiles so JsonStuff
+the @file{__jsonstuff_make_local__} script to build the octfiles so JsonStuff
 will work. Then add the @file{inst} directory in the repo to your Octave path.
 
 
