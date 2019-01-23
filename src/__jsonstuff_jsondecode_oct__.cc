@@ -58,15 +58,21 @@ decode_array (Json::Value jval) {
   	}
   }
   if (is_all_numeric) {
-  	NDArray out (dim_vector (1, jval.size()));
-  	for (int i = 0; i < jval.size(); i++) {
-  	  if (jval[i].isNull ()) {
-  	  	out(i) = NAN;
-  	  } else {
-  	    out(i) = jval[i].asDouble();
-  	  }
-  	}
-  	return out;
+    if (jval.size () == 0) {
+      // Special case: empty numerics are [], not 1-by-0
+      NDArray out (dim_vector (0, 0));
+      return out;
+    } else {
+    	NDArray out (dim_vector (1, jval.size ()));
+    	for (int i = 0; i < jval.size(); i++) {
+    	  if (jval[i].isNull ()) {
+    	  	out(i) = NAN;
+    	  } else {
+    	    out(i) = jval[i].asDouble();
+    	  }
+    	}
+    	return out;
+    }
   } else {
   	Cell out (dim_vector (1, jval.size()));
   	for (int i = 0; i < jval.size(); i++) {
