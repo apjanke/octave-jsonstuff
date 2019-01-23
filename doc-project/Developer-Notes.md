@@ -6,7 +6,7 @@ JsonStuff Developer Notes
 ### Environments
 
 | OS | Environment | OS Version           | Octave | jsoncpp | Texinfo | Qt | Comments |
-| -- | | ----------- | ------------------ | ------ | ----- |------- | ----- | -------- |
+| -- | ----------- | -------------------- | ------ | ----- |------- | ----- | -------- |
 | Ubuntu | Bionic     | 18 Bionic         | 4.2.2  | 1.7   | 6.5    | 5.9   | No Travis env yet |
 | Ubuntu | Xenial     | 16 Xenial         | 4.0    | 1.7   | 6.1    | 5.5   |       |
 | Ubuntu | Trusty     | 14 Trusty         | 3.8    | 0.6   | 5.2    | 5.2   |       |
