@@ -41,11 +41,12 @@ function octave_jsonstuff_make_local
       me, my_dir);
   endif
   octfcns = {
-    ## '__oct_time_binsearch__'
+    '__jsonstuff_jsondecode_oct__'
     };
   for i = 1:numel (octfcns)
     octfcn = octfcns{i};
-    mkoctfile (sprintf ('src/%s.cc', octfcn));
+    src_file = sprintf ('src/%s.cc', octfcn);
+    mkoctfile (src_file, '-l jsoncpp');
     delete (sprintf ('%s.o', octfcn));
     movefile (sprintf ('%s.oct', octfcn), 'inst');
     printf (sprintf ('Built %s\n', octfcn));
