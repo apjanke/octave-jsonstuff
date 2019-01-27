@@ -11,6 +11,7 @@ JsonStuff TODO
 
 ## Code
 
+* Switch to "amalgamated source" jsoncpp build so there's no external library dependencies and it works on Windows
 * Tests
 * jsondecode
   * conformant-struct condensation
