@@ -3,15 +3,10 @@ JsonStuff TODO
 
 ## Big things
 
-* Get building and running on Windows
-* Fix build on Ubuntu
-  * Need to include `<jsoncpp/json/json.h>` instead of just `<json/json.h>`
-  * Get compiling on older Ubuntus: Trusty and Xenial
 * Unify `make local` target and `src/Makefile`
 
 ## Code
 
-* Switch to "amalgamated source" jsoncpp build so there's no external library dependencies and it works on Windows
 * Tests
 * jsondecode
   * conformant-struct condensation
@@ -30,5 +25,6 @@ JsonStuff TODO
 
 * Get TravisBuddy working
 * Travis build
-  * run octave: run tests on installed package
+  * Try Docker for installing 4.4 on Linux: https://github.com/mtmiller/octave-snapshot
+  * Get Octave working on Windows Travis env
 
