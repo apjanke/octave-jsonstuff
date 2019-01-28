@@ -59,7 +59,7 @@ endif
 ## to not display it (makes specially sense for echo).
 help:
 	@echo "Targets:"
-	@echo "   local   - Build octfiles int local inst/ directory"
+	@echo "   local   - Build octfiles into local inst/ directory"
 	@echo "   dist    - Create $(release_tarball) for release."
 	@echo "   html    - Create $(html_tarball) for release."
 	@echo "   release - Create both of the above and show md5sums."
@@ -71,8 +71,31 @@ help:
 
 
 ##
+## JsonCpp "amalgamated source" stuff
+##
+
+.PHONY: jsoncpp-amalgamated
+
+opp/jsoncpp-1.8.4.tar.gz:
+	cd opp && \
+	wget https://github.com/open-source-parsers/jsoncpp/archive/1.8.4.tar.gz && \
+	mv 1.8.4.tar.gz jsoncpp-1.8.4.tar.gz
+
+src/jsoncpp.cpp: opp/jsoncpp-1.8.4.tar.gz
+	mkdir -p build
+	cd build && \
+	tar xzf ../opp/jsoncpp-1.8.4.tar.gz && \
+	cd jsoncpp-1.8.4 && \
+	python amalgamate.py
+	cp -R build/jsoncpp-1.8.4/dist/* src
+
+jsoncpp-amalgamated: src/jsoncpp.cpp
+
+##
 ## Recipes for release tarballs (package + html)
 ##
+
+.PHONY: dist html clean-tarbals
 
 ## dist and html targets are only PHONY/alias targets to the release
 ## and html tarballs.
@@ -199,7 +222,7 @@ check: $(install_stamp)
 ## Recipes for local (in-tree) build
 ##
 
-.PHONY: local doc clean-local
+.PHONY: local doc
 
 # This used to call __jsonstuff_make_local__.m
 local: src/*.cc 
@@ -214,6 +237,8 @@ doc:
 ## CLEAN
 ##
 
+.PHONY: clean clean-local clean-unpacked-release maintainer-clean
+
 clean-local:
 	rm -f inst/*.oct src/*.oct src/*.o
 
@@ -223,4 +248,6 @@ clean-unpacked-release:
 clean: clean-local
 	$(RM) -rf $(target_dir)
 
-.PHONY: release dist html clean clean-tarballs clean-unpacked-release
+maintainer-clean: clean
+	$(RM) -rf src/json src/jsoncpp.cpp
+
