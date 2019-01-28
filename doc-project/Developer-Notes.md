@@ -33,7 +33,7 @@ I think we currently require:
 
 * Double-check the version numbers:
   * in `DESCRIPTION` and `.travis.yml`
-  * in the installation instructions in `README.md`
+* Update the version in the URL in installation instructions in `README.md`
 * Update the Date in `DESCRIPTION`
 * Run tests
 * `git tag vX.Y.Z`
@@ -43,5 +43,5 @@ I think we currently require:
 * Open development on new version
   * Update the version numbers 
     * in `DESCRIPTION` and `.travis.yml`
-    * in the installation instructions in `README.md`
+    * do *not* update the URL in the installation instructions in `README.md`
   * `git commit -a -m "Open development on vX.Y.Z"; git push`
