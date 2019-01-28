@@ -1,10 +1,5 @@
 language: c
 
-# Let's build everything for now; comment this out
-#branches:
-#  only:
-#    - master
-
 notifications:
   webhooks: https://www.travisbuddy.com/
   on_success: never
