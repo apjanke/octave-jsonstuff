@@ -31,13 +31,11 @@ pkg load jsonstuff
 ## Requirements
 
 * Octave 4.2 or newer
-* Linux or macOS (not Windows), for now
 
 JsonStuff runs on Octave 4.4.0 and later. It would be nice to have it work on Octave 4.0.0
 and later (since Ubuntu 16 Xenial has Octave 4.0 and Ubuntu 18 Bionic has Octave 4.2); maybe we'll do that some day.
 
-JsonStuff currently only works on Mac and Linux. I haven't figured out how to get it to build
-octfiles with the `jsoncpp` library on Windows yet. But that's on the TODO list.
+JsonStuff works on macOS, Linux, and Windows. (Though our CI is not running on Windows yet.)
 
 ## Documentation
 
