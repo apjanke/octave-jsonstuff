@@ -1,6 +1,6 @@
 MKOCTFILE ?= mkoctfile
 
-MKOCT_LDFLAGS=-ljsoncpp
+MKOCT_LDFLAGS=
 
 .PHONY: all clean distclean
 
