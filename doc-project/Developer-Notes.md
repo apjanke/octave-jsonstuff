@@ -27,3 +27,17 @@ I think we currently require:
 | Texinfo | 5.x     | Supports auto-numbering |
 | Octave  | 4.4     | |
 | jsoncpp | ???     | |
+
+
+# Release checklist
+
+* Double-check the version number in `DESCRIPTION` and `.travis.yml`
+* Run tests
+* `git tag vX.Y.Z`
+* `git push; git push --tags`
+* Draft the release on GitHub
+* `make dist` and upload the tarball as a file for the release
+* Open development on new version
+  * Update the version numbers in `DESCRIPTION` and `.travis.yml`
+  * `git commit -a -m "Open development on vX.Y.Z"; git push`
+  
