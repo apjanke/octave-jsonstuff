@@ -30,7 +30,7 @@ pkg load jsonstuff
 
 ## Requirements
 
-* Octave 4.2 or newer
+* Octave 4.4 or newer
 
 JsonStuff runs on Octave 4.4.0 and later. It would be nice to have it work on Octave 4.0.0
 and later (since Ubuntu 16 Xenial has Octave 4.0 and Ubuntu 18 Bionic has Octave 4.2); maybe we'll do that some day.
