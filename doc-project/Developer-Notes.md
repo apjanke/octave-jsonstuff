@@ -32,6 +32,7 @@ I think we currently require:
 # Release checklist
 
 * Double-check the version number in `DESCRIPTION` and `.travis.yml`
+* Update the Date in `DESCRIPTION`
 * Run tests
 * `git tag vX.Y.Z`
 * `git push; git push --tags`
@@ -40,4 +41,3 @@ I think we currently require:
 * Open development on new version
   * Update the version numbers in `DESCRIPTION` and `.travis.yml`
   * `git commit -a -m "Open development on vX.Y.Z"; git push`
-  
