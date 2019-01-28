@@ -16,7 +16,7 @@ This package attempts to provide a set of Matlab-compatible JSON encoding and de
 To get started using or testing this project, install it using Octave's `pkg` function:
 
 ```
-pkg install https://github.com/apjanke/octave-jsonstuff/releases/download/v0.1.0/jsonstuff-0.1.0.tar.gz
+pkg install https://github.com/apjanke/octave-jsonstuff/releases/download/v0.2.0/jsonstuff-0.2.0.tar.gz
 pkg load jsonstuff
 ```
 
