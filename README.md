@@ -24,35 +24,20 @@ pkg load jsonstuff
 
 * Clone the repo.
   * `git clone https://github.com/apjanke/octave-jsonstfuf`
-* Add the `inst/` directory from the repo to your Octave path.
-* Build the octfiles.
-  * `octave_jsonstuff_make_local.m` will do this. Just run `octave_jsonstuff_make_local` in Octave while your cwd is the `octave-jsonstuff` repo.
+* Run `make dist` in a shell.
+* Install the resulting `target/jsonstuff-X.Y.Z.tar.gz` package file by running `pkg install /path/to/repo/octave-jsonstuff/target/jsonstuff-X.Y.Z.tar.gz` in Octave.
+* Lather, rinse, and repeat each time you make changes to any of the source code.
 
 ## Requirements
 
 * Octave 4.2 or newer
-* `jsoncpp` library 1.x or newer
 * Linux or macOS (not Windows), for now
 
 JsonStuff runs on Octave 4.4.0 and later. It would be nice to have it work on Octave 4.0.0
-and later (since Ubuntu 16 Xenial has Octave 4.0 and Ubuntu 18 Bionic has Octave 4.2); maybe we'll do that.
+and later (since Ubuntu 16 Xenial has Octave 4.0 and Ubuntu 18 Bionic has Octave 4.2); maybe we'll do that some day.
 
 JsonStuff currently only works on Mac and Linux. I haven't figured out how to get it to build
 octfiles with the `jsoncpp` library on Windows yet. But that's on the TODO list.
-
-To install the required `jsconcpp` library, use your OS's package manager.
-
-On Ubuntu:
-```
-sudo apt-get install libjsoncpp-dev
-```
-
-On macOS with Homebrew installed:
-```
-brew install jsoncpp
-```
-
-You need `jsoncpp` 1.x or newer. On Ubuntu, that means Ubuntu 16.04 Xenial or later is required; 14.04 Trusty's jsoncpp is too old.
 
 ## Documentation
 
@@ -70,7 +55,11 @@ Anything in a namespace with `internal` in its name is for the internal use of t
 
 ## License
 
-JsonStuff is Free Software, licensed under the GNU GPLv3.
+JsonStuff is Free Software.
+
+The JsonStuff code itself is licensed under the GNU GPLv3.
+
+JsonStuff includes a redistribution of the [JsonCpp](https://github.com/open-source-parsers/jsoncpp) library as source code, which is licensed under Public Domain and the MIT License.
 
 ## Author and Support
 
