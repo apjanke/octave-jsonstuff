@@ -9,7 +9,7 @@ env:
     - OCTAVE_VER=4.4
     - OCTAVE=octave
     - OCT_PKG=control
-    - OCT_PKG_VER=3.1.0
+    - OCT_PKG_VER=0.1.0
 
 addons:
   apt:
