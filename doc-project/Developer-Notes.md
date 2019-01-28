@@ -31,7 +31,9 @@ I think we currently require:
 
 # Release checklist
 
-* Double-check the version number in `DESCRIPTION` and `.travis.yml`
+* Double-check the version numbers:
+  * in `DESCRIPTION` and `.travis.yml`
+  * in the installation instructions in `README.md`
 * Update the Date in `DESCRIPTION`
 * Run tests
 * `git tag vX.Y.Z`
@@ -39,5 +41,7 @@ I think we currently require:
 * Draft the release on GitHub
 * `make dist` and upload the tarball as a file for the release
 * Open development on new version
-  * Update the version numbers in `DESCRIPTION` and `.travis.yml`
+  * Update the version numbers 
+    * in `DESCRIPTION` and `.travis.yml`
+    * in the installation instructions in `README.md`
   * `git commit -a -m "Open development on vX.Y.Z"; git push`
