@@ -22,8 +22,8 @@ along with Octave; see the file COPYING.  If not, see
 #include <iostream>
 #include <sstream>
 
-#include <json/json.h>
 #include <octave/oct.h>
+#include "json/json.h"
 
 // Inputs:
 //   1: Encoded JSON data as char vector
