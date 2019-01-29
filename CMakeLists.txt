@@ -5,6 +5,8 @@ set(CMAKE_CXX_STANDARD 14)
 
 include_directories(src)
 include_directories(src/json)
+include_directories(/usr/local/include/octave-4.4.1)
+
 
 add_executable(octave_jsonstuff
         src/json/json-forwards.h
