@@ -5,4 +5,6 @@
 /doc/DOCSTRINGS.texi.tmp
 /doc/*.dvi
 /doc/*.qhc
-
+cmake-build-debug
+!.idea
+.idea/workspace.xml
