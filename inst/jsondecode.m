@@ -44,3 +44,4 @@ endfunction
 %!assert (jsondecode ('[1, 2, null]'), [1 2 NaN])
 %!assert (jsondecode ('[1, 2, "foo"]'), {1 2 "foo"})
 %!assert (jsondecode ('{"foo": 42, "bar": "hello"}'), struct("foo",42, "bar","hello"))
+%!assert (jsondecode ('[{"foo": 42, "bar": "hello"}, {"foo": 1.23, "bar": "world"}]'), struct("foo", {42 1.23}, "bar", {"hello", "world"}))

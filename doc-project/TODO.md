@@ -9,7 +9,6 @@ JsonStuff TODO
 
 * Tests
 * jsondecode
-  * conformant-struct condensation
   * Extension: field-filling for arrays of objects -> struct array instead of cell array of structs
 * jsonencode
   * Maybe support Java objects in inputs?
