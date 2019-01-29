@@ -9,7 +9,7 @@ env:
     - OCTAVE_VER=4.4
     - OCTAVE=octave
     - OCT_PKG=jsonstuff
-    - OCT_PKG_VER=0.2.0
+    - OCT_PKG_VER=0.3.0
 
 addons:
   apt:
