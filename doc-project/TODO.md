@@ -24,4 +24,4 @@ JsonStuff TODO
 * Travis build
   * Try Docker for installing 4.4 on Linux: https://github.com/mtmiller/octave-snapshot
   * Get Octave working on Windows Travis env
-
+* Add a `make dist-local` target that copies currently-changed files instead of extracting from git history
