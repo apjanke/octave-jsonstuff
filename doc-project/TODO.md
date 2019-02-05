@@ -9,7 +9,6 @@ JsonStuff TODO
 
 * Tests
 * jsondecode
-  * conformant-struct condensation
   * Extension: field-filling for arrays of objects -> struct array instead of cell array of structs
 * jsonencode
   * Maybe support Java objects in inputs?
@@ -18,8 +17,6 @@ JsonStuff TODO
   * So I can support various encoding/decoding options
 * Maybe [UBJSON](https://en.wikipedia.org/wiki/UBJSON) support
 * Maybe octfile-ify jsonencode, for speed
-* Documentation
-  * __octave_link_register_doc__ doesn't work on Octave 4.2. Make PKG_ADD version-sensitive
 
 ## Project
 
@@ -27,4 +24,4 @@ JsonStuff TODO
 * Travis build
   * Try Docker for installing 4.4 on Linux: https://github.com/mtmiller/octave-snapshot
   * Get Octave working on Windows Travis env
-
+* Add a `make dist-local` target that copies currently-changed files instead of extracting from git history

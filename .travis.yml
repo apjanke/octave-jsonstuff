@@ -9,7 +9,7 @@ env:
     - OCTAVE_VER=4.4
     - OCTAVE=octave
     - OCT_PKG=jsonstuff
-    - OCT_PKG_VER=0.2.0
+    - OCT_PKG_VER=0.3.0
 
 addons:
   apt:
@@ -36,12 +36,10 @@ matrix:
       osx_image: xcode10.1
     - os: osx
       osx_image: xcode10
-    - os: windows
 
 install:
   # Install Octave 4.4, even if it's not the default
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]];   then ./dev-tools/install-octave-ubuntu.sh;  fi
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then ./dev-tools/install-octave-windows.sh; fi
 
 script:
   - echo PATH=$PATH
