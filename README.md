@@ -23,7 +23,7 @@ pkg load jsonstuff
 ### Installation for development
 
 * Clone the repo.
-  * `git clone https://github.com/apjanke/octave-jsonstfuf`
+  * `git clone https://github.com/apjanke/octave-jsonstuff`
 * Run `make dist` in a shell.
 * Install the resulting `target/jsonstuff-X.Y.Z.tar.gz` package file by running `pkg install /path/to/repo/octave-jsonstuff/target/jsonstuff-X.Y.Z.tar.gz` in Octave.
 * Lather, rinse, and repeat each time you make changes to any of the source code.
