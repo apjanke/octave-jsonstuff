@@ -196,7 +196,7 @@ test: local
 	./dev-tools/runtests.sh inst
 
 ## Start an Octave session with the package directories on the path for
-## interactice test of development sources.
+## interactive test of development sources.
 run: $(install_stamp)
 	$(run_in_place) --persist
 
