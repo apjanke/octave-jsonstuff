@@ -34,8 +34,6 @@ matrix:
         - OCTAVE="flatpak run org.octave.Octave"
     - os: osx
       osx_image: xcode10.1
-    - os: osx
-      osx_image: xcode10
 
 install:
   # Install Octave 4.4, even if it's not the default
