@@ -1,5 +1,4 @@
-JsonStuff for GNU Octave
-========================
+# JsonStuff for GNU Octave
 
 | WARNING: All the code in here is currently in the alpha stage. (Pre-beta, that is.) Do not use it in any production or business code! Seriously!! |
 | ---- |
@@ -8,15 +7,14 @@ JSON encoding/decoding functionality for GNU Octave.
 
 This package attempts to provide a set of Matlab-compatible JSON encoding and decoding functions, namely `jsonencode` and `jsondecode`.
 
-
 ## Installation and usage
 
 ### Quick start
 
 To get started using or testing this project, install it using Octave's `pkg` function:
 
-```
-pkg install https://github.com/apjanke/octave-jsonstuff/releases/download/v0.2.0/jsonstuff-0.2.0.tar.gz
+```octave
+pkg install https://github.com/apjanke/octave-jsonstuff/releases/download/v0.3.1/jsonstuff-0.3.1.tar.gz
 pkg load jsonstuff
 ```
 
