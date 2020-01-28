@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- This manual is for JsonStuff, version 0.2.0.
+<!-- This manual is for JsonStuff, version 0.3.2.
 
 Copyright (C) 2019 Andrew Janke
 
@@ -15,42 +15,33 @@ notice identical to this one.
 
 Permission is granted to copy and distribute translations of this manual
 into another language, under the same conditions as for modified versions. -->
-<!-- Created by GNU Texinfo 6.5, http://www.gnu.org/software/texinfo/ -->
+<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>jsonencode (JsonStuff for GNU Octave v0.2.0)</title>
+<title>jsonencode (JsonStuff for GNU Octave v0.3.2)</title>
 
 <meta name="description" content="User manual for JsonStuff for GNU Octave.">
-<meta name="keywords" content="jsonencode (JsonStuff for GNU Octave v0.2.0)">
+<meta name="keywords" content="jsonencode (JsonStuff for GNU Octave v0.3.2)">
 <meta name="resource-type" content="document">
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
-<link href="index.html#Top" rel="start" title="Top">
+<link href="index.html" rel="start" title="Top">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
-<link href="Functions-Alphabetically.html#Functions-Alphabetically" rel="up" title="Functions Alphabetically">
-<link href="Copying.html#Copying" rel="next" title="Copying">
-<link href="jsondecode.html#jsondecode" rel="prev" title="jsondecode">
+<link href="Functions-Alphabetically.html" rel="up" title="Functions Alphabetically">
+<link href="Copying.html" rel="next" title="Copying">
+<link href="jsondecode.html" rel="prev" title="jsondecode">
 <style type="text/css">
 <!--
 a.summary-letter {text-decoration: none}
 blockquote.indentedblock {margin-right: 0em}
-blockquote.smallindentedblock {margin-right: 0em; font-size: smaller}
-blockquote.smallquotation {font-size: smaller}
 div.display {margin-left: 3.2em}
 div.example {margin-left: 3.2em}
 div.lisp {margin-left: 3.2em}
-div.smalldisplay {margin-left: 3.2em}
-div.smallexample {margin-left: 3.2em}
-div.smalllisp {margin-left: 3.2em}
 kbd {font-style: oblique}
 pre.display {font-family: inherit}
 pre.format {font-family: inherit}
 pre.menu-comment {font-family: serif}
 pre.menu-preformatted {font-family: serif}
-pre.smalldisplay {font-family: inherit; font-size: smaller}
-pre.smallexample {font-size: smaller}
-pre.smallformat {font-family: inherit; font-size: smaller}
-pre.smalllisp {font-size: smaller}
 span.nolinebreak {white-space: nowrap}
 span.roman {font-family: initial; font-weight: normal}
 span.sansserif {font-family: sans-serif; font-weight: normal}
@@ -62,17 +53,15 @@ ul.no-bullet {list-style: none}
 </head>
 
 <body lang="en">
-<a name="jsonencode"></a>
-<div class="header">
+<span id="jsonencode"></span><div class="header">
 <p>
-Previous: <a href="jsondecode.html#jsondecode" accesskey="p" rel="prev">jsondecode</a>, Up: <a href="Functions-Alphabetically.html#Functions-Alphabetically" accesskey="u" rel="up">Functions Alphabetically</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+Previous: <a href="jsondecode.html" accesskey="p" rel="prev">jsondecode</a>, Up: <a href="Functions-Alphabetically.html" accesskey="u" rel="up">Functions Alphabetically</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
 <hr>
-<a name="jsonencode-1"></a>
-<h4 class="subsection">3.2.2 jsonencode</h4>
+<span id="jsonencode-1"></span><h4 class="subsection">3.2.2 jsonencode</h4>
 <dl>
-<dt><a name="index-jsonencode"></a>Function: <em><var>text</var> =</em> <strong>jsonencode</strong> <em>(<var>data</var>)</em></dt>
-<dt><a name="index-jsonencode-1"></a>Function: <em><var>text</var> =</em> <strong>jsonencode</strong> <em>(<var>data</var>, <code>&quot;ConvertInfAndNaN&quot;</code>, <var>TF</var>)</em></dt>
+<dt id="index-jsonencode">Function: <em><var>text</var> =</em> <strong>jsonencode</strong> <em>(<var>data</var>)</em></dt>
+<dt id="index-jsonencode-1">Function: <em><var>text</var> =</em> <strong>jsonencode</strong> <em>(<var>data</var>, <code>&quot;ConvertInfAndNaN&quot;</code>, <var>TF</var>)</em></dt>
 <dd>
 <p>Encode Octave data as JSON.
 </p>
@@ -82,7 +71,7 @@ result as a character vector.
 <p><code>jsonencode(..., &quot;ConvertInfAndNaN&quot;, TF)</code> controls the encoding of special floating
 point values NaN, Inf, and -Inf.
 </p>
-<p>See <a href="jsondecode.html#jsondecode">jsondecode</a>
+<p>See <a href="jsondecode.html">jsondecode</a>
 </p>
 </dd></dl>
 

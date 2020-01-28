@@ -1,7 +1,7 @@
-This is jsonstuff.info, produced by makeinfo version 6.5 from
+This is jsonstuff.info, produced by makeinfo version 6.7 from
 jsonstuff.texi.
 
-This manual is for JsonStuff, version 0.2.0.
+This manual is for JsonStuff, version 0.3.2.
 
    Copyright © 2019 Andrew Janke
 
@@ -19,12 +19,12 @@ This manual is for JsonStuff, version 0.2.0.
      modified versions.
 
 
-File: jsonstuff.info,  Node: Top,  Next: Introduction
+File: jsonstuff.info,  Node: Top,  Next: Introduction,  Up: (dir)
 
 JsonStuff
 *********
 
-This manual is for JsonStuff, version 0.2.0.
+This manual is for JsonStuff, version 0.3.2.
 
 * Menu:
 
@@ -39,7 +39,7 @@ File: jsonstuff.info,  Node: Introduction,  Next: Getting Started,  Up: Top
 1 Introduction
 **************
 
-This is the manual for the JsonStuff package version 0.2.0 for GNU
+This is the manual for the JsonStuff package version 0.3.2 for GNU
 Octave.
 
    This document is a work in progress.  You are invited to help improve
@@ -164,7 +164,7 @@ JsonStuff for Octave is licensed under the GNU GPLv3.
 4.2 Manual Copyright
 ====================
 
-This manual is for JsonStuff, version 0.2.0.
+This manual is for JsonStuff, version 0.3.2.
 
    Copyright © 2019 Andrew Janke
 
@@ -185,14 +185,14 @@ This manual is for JsonStuff, version 0.2.0.
 
 Tag Table:
 Node: Top769
-Node: Introduction975
-Node: Getting Started1618
-Node: Function Reference2481
-Node: Functions by Category2690
-Node: Functions Alphabetically3006
-Node: jsondecode3273
-Node: jsonencode3781
-Node: Copying4317
+Node: Introduction987
+Node: Getting Started1630
+Node: Function Reference2493
+Node: Functions by Category2702
+Node: Functions Alphabetically3018
+Node: jsondecode3285
+Node: jsonencode3793
+Node: Copying4329
 
 End Tag Table
 
