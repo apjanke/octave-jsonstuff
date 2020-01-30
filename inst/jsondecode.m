@@ -33,7 +33,58 @@
 ## @end deftypefn
 
 function out = jsondecode (text)
-  out = __jsonstuff_jsondecode_oct__ (text);
+  data = __jsonstuff_jsondecode_oct__ (text);
+  out = condense_decoded_json (data);
+endfunction
+
+function out = condense_decoded_json (x)
+  out = condense_decoded_json_recursive (x);
+endfunction
+
+function out = condense_decoded_json_recursive (x)
+  if ~iscell (x)
+    out = x;
+    return
+  endif
+  if isempty (x)
+    out = x;
+    return
+  endif
+  x2 = x;
+
+  % I _think_ this is the proper condensation for a 1-long array?
+  if isscalar (x) && isnumeric (x{1})
+    out = x{1};
+    return
+  end
+
+  % Depth-first: condense the component arrays first
+  for i = 1:numel(x2)
+    x2{i} = condense_decoded_json_recursive (x{i});
+  endfor
+
+  % Numeric arrays are condensable if they have all the same dimensions
+  % All other condensation has been handled by the oct-file
+  sz = size (x2{1});
+  is_condensable = true
+  for i = 2:numel (x2)
+    if ~isequal (size (x2{i}), sz)
+      is_condensable = false;
+      break
+    endif
+  endfor
+
+  if is_condensable
+    n_dims = ndims(x2{1});
+    ix_permute = [n_dims+1 1:n_dims];
+    for i = 1:numel (x2)
+      x2{i} = permute (x2{i}, ix_permute);
+    endfor
+    out = cat (1, x2{:});
+  else
+    out = x2;
+  endif
+
 endfunction
 
 %!assert (jsondecode ('42'), 42)
