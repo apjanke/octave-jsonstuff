@@ -84,7 +84,7 @@ decode_array (const Json::Value &jval) {
       // Special case: empty numerics are [], not 1-by-0
       return NDArray (dim_vector (0, 0));
     } else {
-    	NDArray out (dim_vector (1, jval.size ()));
+    	NDArray out (dim_vector (jval.size (), 1));
     	for (int i = 0; i < jval.size (); i++) {
     	  if (jval[i].isNull ()) {
     	  	out(i) = NAN;
@@ -98,7 +98,7 @@ decode_array (const Json::Value &jval) {
     bool is_any_child_condensed = false;
     bool is_all_child_structs = true;
     int n_children = jval.size();
-  	Cell children (dim_vector (1, n_children));
+  	Cell children (dim_vector (n_children, 1));
   	for (int i = 0; i < n_children; i++) {
   	  auto rslt = decode_recursive (jval[i]);
   	  is_all_child_structs &= rslt.value.isstruct ();
@@ -121,7 +121,7 @@ decode_array (const Json::Value &jval) {
       }
     }
     if (is_condensable) {
-      octave_map s (dim_vector (1, n_children));
+      octave_map s (dim_vector (n_children, 1));
       for (octave_idx_type i = 0; i < n_children; i++) {
         s.assign (idx_vector (i), children(i).map_value ());
       }
