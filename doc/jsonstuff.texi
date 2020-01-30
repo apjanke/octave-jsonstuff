@@ -2,7 +2,7 @@
 
 @c %**start of header
 
-@set VERSION 0.3.2
+@set VERSION 0.3.3-SNAPSHOT
 
 @setfilename jsonstuff.info
 @settitle JsonStuff for GNU Octave v@value{VERSION}

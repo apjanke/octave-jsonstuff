@@ -1,7 +1,7 @@
 This is jsonstuff.info, produced by makeinfo version 6.7 from
 jsonstuff.texi.
 
-This manual is for JsonStuff, version 0.3.2.
+This manual is for JsonStuff, version 0.3.3-SNAPSHOT.
 
    Copyright © 2019 Andrew Janke
 
@@ -24,7 +24,7 @@ File: jsonstuff.info,  Node: Top,  Next: Introduction,  Up: (dir)
 JsonStuff
 *********
 
-This manual is for JsonStuff, version 0.3.2.
+This manual is for JsonStuff, version 0.3.3-SNAPSHOT.
 
 * Menu:
 
@@ -39,8 +39,8 @@ File: jsonstuff.info,  Node: Introduction,  Next: Getting Started,  Up: Top
 1 Introduction
 **************
 
-This is the manual for the JsonStuff package version 0.3.2 for GNU
-Octave.
+This is the manual for the JsonStuff package version 0.3.3-SNAPSHOT for
+GNU Octave.
 
    This document is a work in progress.  You are invited to help improve
 it and submit patches.
@@ -164,7 +164,7 @@ JsonStuff for Octave is licensed under the GNU GPLv3.
 4.2 Manual Copyright
 ====================
 
-This manual is for JsonStuff, version 0.3.2.
+This manual is for JsonStuff, version 0.3.3-SNAPSHOT.
 
    Copyright © 2019 Andrew Janke
 
@@ -184,15 +184,15 @@ This manual is for JsonStuff, version 0.3.2.
 
 
 Tag Table:
-Node: Top769
-Node: Introduction987
-Node: Getting Started1630
-Node: Function Reference2493
-Node: Functions by Category2702
-Node: Functions Alphabetically3018
-Node: jsondecode3285
-Node: jsonencode3793
-Node: Copying4329
+Node: Top778
+Node: Introduction1005
+Node: Getting Started1657
+Node: Function Reference2520
+Node: Functions by Category2729
+Node: Functions Alphabetically3045
+Node: jsondecode3312
+Node: jsonencode3820
+Node: Copying4356
 
 End Tag Table
 
