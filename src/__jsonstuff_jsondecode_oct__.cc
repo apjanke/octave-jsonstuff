@@ -207,7 +207,6 @@ decode_json_text (const std::string &json_str) {
   }
 }
 
-
 DEFUN_DLD (__jsonstuff_jsondecode_oct__, args, nargout,
   "Decode JSON text to Octave value\n"
   "\n"
