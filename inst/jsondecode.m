@@ -66,7 +66,7 @@ function out = condense_decoded_json_recursive (x)
   % Numeric arrays are condensable if they have all the same dimensions
   % All other condensation has been handled by the oct-file
   sz = size (x2{1});
-  is_condensable = true
+  is_condensable = true;
   for i = 2:numel (x2)
     if ~isequal (size (x2{i}), sz)
       is_condensable = false;
@@ -96,3 +96,5 @@ endfunction
 %!assert (jsondecode ('[1, 2, "foo"]'), {1; 2; "foo"})
 %!assert (jsondecode ('{"foo": 42, "bar": "hello"}'), struct("foo",42, "bar","hello"))
 %!assert (jsondecode ('[{"foo": 42, "bar": "hello"}, {"foo": 1.23, "bar": "world"}]'), struct("foo", {42; 1.23}, "bar", {"hello"; "world"}))
+%!assert (jsondecode ('[[1, 2], [3, 4]]'), [1 2; 3 4])
+%!assert (jsondecode ('[[[1, 2], [3, 4]], [[5, 6], [7, 8]]]'), cat(3, [1 3; 5 7], [2 4; 6 8]))
