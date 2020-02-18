@@ -112,9 +112,14 @@ decode_array (const Json::Value &jval) {
     bool is_condensable = true;
     octave_map s0 = children(0).map_value ();
     string_vector fields0 = s0.fieldnames ();
-    for (int i_child = 1; i_child < n_children; i_child++) {
+    for (int i_child = 0; i_child < n_children; i_child++) {
       octave_map s = children(i_child).map_value ();
       string_vector fields = s.fieldnames ();
+      // For some reason, empty structs are not considered condensable
+      if (fields.numel() == 0) {
+        is_condensable = false;
+        break;
+      }
       if (! (equals (fields0, fields))) {
         is_condensable = false;
         break;
