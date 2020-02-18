@@ -26,7 +26,10 @@
 ## result as a character vector.
 ##
 ## @code{jsonencode (..., "ConvertInfAndNaN", TF)} controls the encoding of special floating
-## point values NaN, Inf, and -Inf.
+## point values NaN, Inf, and -Inf. When @var{ConvertInfAndNaN} is true, then Inf and NaN
+## values are converted to JSON nulls. When @var{ConvertInfAndNaN} is false, then
+## Inf and NaN values are represented as the non-standard JSON values @code{Infinity}
+## and @code{NaN}. The default is true.
 ##
 ## @xref{jsondecode}
 ##
