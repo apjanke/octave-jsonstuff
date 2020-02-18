@@ -50,43 +50,46 @@ function out = condense_decoded_json_recursive (x)
     out = x;
     return
   endif
-  x2 = x;
-
-  % I _think_ this is the proper condensation for a 1-long array?
-  if isscalar (x2) && isnumeric (x2{1})
-    out = x2{1};
-    return
-  end
+  x_in = x; % for debugging
 
   % Depth-first: condense the component arrays first
-  for i = 1:numel (x2)
-    x2{i} = condense_decoded_json_recursive (x{i});
-  endfor
-
-  % Numeric arrays are condensable if they have all the same dimensions
-  % All other condensation has been handled by the oct-file
-  sz = size (x2{1});
-  is_condensable = true;
-  for i = 1:numel (x2)
-    if ~isnumeric (x2{i})
-      is_condensable = false;
-      break
-    endif
-    if ~isequal (size (x2{i}), sz)
-      is_condensable = false;
-      break
+  for i = 1:numel (x)
+    x{i} = condense_decoded_json_recursive (x{i});
+    % Permute/"Rotate" all child values up 1 dimension
+    % We need to do the rotation here, because it happens regardless of whether
+    % the children actually end up getting condensed together.
+    if ~isempty (x{i}) && ~ischar (x{i})
+      x{i} = permute (x{i}, [ndims(x{i})+1 1:ndims(x{i})]);
     endif
   endfor
+  
+  % Struct and arrays are condensable if they have all the same dimensions
+  sz = size (x{1});
+  is_all_struct = true;
+  is_all_numeric = true;
+  is_conformant = true;
+  for i = 1:numel (x)
+    if ~isnumeric (x{i})
+      is_all_numeric = false;
+    endif
+    if ~isstruct (x{i})
+      is_all_struct = false;
+    endif
+    if ~isequal (size (x{i}), sz)
+      is_conformant = false;
+    endif
+    % Check if we can stop looking
+    if !is_conformant || (!is_all_struct && !is_all_numeric)
+      break
+    endif
+  endfor
 
+  is_condensable = (is_all_struct || is_all_numeric) && is_conformant && ~isempty(x{1});
+  
   if is_condensable
-    n_dims = ndims(x2{1});
-    ix_permute = [n_dims+1 1:n_dims];
-    for i = 1:numel (x2)
-      x2{i} = permute (x2{i}, ix_permute);
-    endfor
-    out = cat (1, x2{:});
+    out = cat (1, x{:});
   else
-    out = x2;
+    out = x;
   endif
 
 endfunction
@@ -95,10 +98,22 @@ endfunction
 %!assert (jsondecode ('"foobar"'), "foobar")
 %!assert (jsondecode ('null'), [])
 %!assert (jsondecode ('[]'), [])
+%!assert (jsondecode ('[[]]'), {[]})
+%!assert (jsondecode ('[[[]]]'), {{[]}})
 %!assert (jsondecode ('[1, 2, 3]'), [1; 2; 3])
 %!assert (jsondecode ('[1, 2, null]'), [1; 2; NaN])
 %!assert (jsondecode ('[1, 2, "foo"]'), {1; 2; "foo"})
 %!assert (jsondecode ('{"foo": 42, "bar": "hello"}'), struct("foo",42, "bar","hello"))
 %!assert (jsondecode ('[{"foo": 42, "bar": "hello"}, {"foo": 1.23, "bar": "world"}]'), struct("foo", {42; 1.23}, "bar", {"hello"; "world"}))
+%!assert (jsondecode ('[1, 2]'), [1; 2])
+%!assert (jsondecode ('[[1, 2]]'), [1 2])
+%!assert (jsondecode ('[[[1, 2]]]'), cat(3, 1, 2))
 %!assert (jsondecode ('[[1, 2], [3, 4]]'), [1 2; 3 4])
+%!assert (jsondecode ('[[[1, 2], [3, 4]]]'), cat(3, [1 3], [2 4]))
 %!assert (jsondecode ('[[[1, 2], [3, 4]], [[5, 6], [7, 8]]]'), cat(3, [1 3; 5 7], [2 4; 6 8]))
+%!assert (jsondecode ('{}'), struct)
+%!assert (jsondecode ('[{}]'), struct)
+%!assert (jsondecode ('[[{}]]'), struct)
+%!assert (jsondecode ('[{}, {}]'), [struct; struct])
+%!assert (jsondecode ('[[{}, {}]]'), [struct struct])
+%!assert (jsondecode ('[[[{}, {}]]]'), cat(3, struct, struct))

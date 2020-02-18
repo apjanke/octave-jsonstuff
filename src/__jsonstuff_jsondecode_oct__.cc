@@ -105,35 +105,7 @@ decode_array (const Json::Value &jval) {
   	  is_any_child_condensed |= rslt.is_condensed;
   	  children(i) = rslt.value;
   	}
-  	bool is_maybe_condensable = is_all_child_structs && ! is_any_child_condensed;
-  	if (! is_maybe_condensable) {
-      return octave_value (children);
-    }
-    bool is_condensable = true;
-    octave_map s0 = children(0).map_value ();
-    string_vector fields0 = s0.fieldnames ();
-    for (int i_child = 0; i_child < n_children; i_child++) {
-      octave_map s = children(i_child).map_value ();
-      string_vector fields = s.fieldnames ();
-      // For some reason, empty structs are not considered condensable
-      if (fields.numel() == 0) {
-        is_condensable = false;
-        break;
-      }
-      if (! (equals (fields0, fields))) {
-        is_condensable = false;
-        break;
-      }
-    }
-    if (is_condensable) {
-      octave_map s (dim_vector (n_children, 1));
-      for (octave_idx_type i = 0; i < n_children; i++) {
-        s.assign (idx_vector (i), children(i).map_value ());
-      }
-      return decode_result (s, true);
-    } else {
-      return octave_value (children);
-    }
+    return octave_value (children);
   }
 }
 
