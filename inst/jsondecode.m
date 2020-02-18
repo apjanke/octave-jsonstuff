@@ -53,13 +53,13 @@ function out = condense_decoded_json_recursive (x)
   x2 = x;
 
   % I _think_ this is the proper condensation for a 1-long array?
-  if isscalar (x) && isnumeric (x{1})
-    out = x{1};
+  if isscalar (x2) && isnumeric (x2{1})
+    out = x2{1};
     return
   end
 
   % Depth-first: condense the component arrays first
-  for i = 1:numel(x2)
+  for i = 1:numel (x2)
     x2{i} = condense_decoded_json_recursive (x{i});
   endfor
 
@@ -67,7 +67,11 @@ function out = condense_decoded_json_recursive (x)
   % All other condensation has been handled by the oct-file
   sz = size (x2{1});
   is_condensable = true;
-  for i = 2:numel (x2)
+  for i = 1:numel (x2)
+    if ~isnumeric (x2{i})
+      is_condensable = false;
+      break
+    endif
     if ~isequal (size (x2{i}), sz)
       is_condensable = false;
       break
