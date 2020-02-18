@@ -25,7 +25,7 @@
 ## Encodes the Octave value @code{data} in JSON format and returns the
 ## result as a character vector.
 ##
-## @code{jsonencode(..., "ConvertInfAndNaN", TF)} controls the encoding of special floating
+## @code{jsonencode (..., "ConvertInfAndNaN", TF)} controls the encoding of special floating
 ## point values NaN, Inf, and -Inf.
 ##
 ## @xref{jsondecode}
