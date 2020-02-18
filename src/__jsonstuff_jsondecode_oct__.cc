@@ -139,7 +139,7 @@ decode_array (const Json::Value &jval) {
 
 decode_result
 decode_object (const Json::Value &jval) {
-  octave_map s;
+  octave_scalar_map s;
   Json::Value::Members members = jval.getMemberNames ();
   for (size_t i = 0; i < members.size (); i++) {
     auto rslt = decode_recursive (jval[members[i]]);
