@@ -63,7 +63,7 @@ function out = jsonencode (data, varargin)
   
   if (! islogical (opts.ConvertInfAndNaN))
     error ("jsonencode: ConvertInfAndNaN argument must be logical; got a %s", ...
-      class(opts.ConvertInfAndNaN));
+      class (opts.ConvertInfAndNaN));
   endif
   
   out = jsonencode_recursive (data);
@@ -141,10 +141,10 @@ function out = jsonencode (data, varargin)
   endfunction
 
   function out = json_encode_number (x)
-    if (! isscalar (x))
+    if ! isscalar (x)
       error ('jsonencode: Internal error: x must be scalar');
     endif
-    if (isinteger (x))
+    if isinteger (x)
       out = num2str (x);
     else
       if iscomplex (x)
@@ -182,7 +182,7 @@ function out = jsonencode (data, varargin)
     ## but am not sure. Verify.
     ## TODO: This M-code implementation will be slowish when control characters
     ## are present. Consider replacing it with an oct function.
-    c = char(str);
+    c = char (str);
     c = strrep (c, '\', '\\');
     c = strrep (c, '"', '\"');
     if any (c < 20)
@@ -205,15 +205,15 @@ function out = jsonencode (data, varargin)
           ## Special-case common control characters for readability of output
           switch c(i)
             case "\b"
-              append ('\b');
+              append ("\b");
             case "\t"
-              append ('\t');
+              append ("\t");
             case "\n"
-              append ('\n');
+              append ("\n");
             case "\f"
-              append ('\f');
+              append ("\f");
             case "\r"
-              append ('\r');
+              append ("\r");
             otherwise
               d = double (c(i));
               append (sprintf ('\u%04d', d));
@@ -256,27 +256,27 @@ function out = jsonencode (data, varargin)
       endif
       strs{i} = jsonencode_recursive (x);
     endfor
-    out = strcat("[", strjoin (strs, ", "), "]");
+    out = strcat ("[", strjoin (strs, ", "), "]");
   endfunction
 
   function out = json_array_of (values)
     ## Convert input to an N-D nested JSON array
     if isvector (values)
       out = json_vector_of (values);
-    elseif ismatrix(values)
+    elseif ismatrix (values)
       rows = {};
       for i = 1:size (values, 1)
         rows{i} = json_vector_of (values(i,:));
       endfor
-      out = strcat("[", strjoin (rows, ", "), "]");
+      out = strcat ("[", strjoin (rows, ", "), "]");
     else
       ## TODO: implement N-D generalization
-      error ("jsonencode: N-D arrays are not supported; input is %d-D", ndims(values));
+      error ("jsonencode: N-D arrays are not supported; input is %d-D", ndims (values));
     end
   endfunction
 
   function out = json_encode_object_generic (x)
-    if (! isscalar (x))
+    if ! isscalar (x)
       error ("jsonencode: Internal error: x must be scalar");
     end
     orig_warn = warning;
@@ -310,7 +310,7 @@ function out = jsonencode (data, varargin)
     if isnat (x)
       out = "null";
     else
-      out = sprintf('"%s"', datestr (x));    
+      out = sprintf ('"%s"', datestr (x));    
     endif
   endfunction
   
@@ -347,7 +347,7 @@ function out = hasmethod (x, method_name)
 endfunction
 
 function out = ifthen (condition, true_value, false_value)
-  if (condition)
+  if condition
     out = true_value;
   else
     out = false_value;
