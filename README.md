@@ -5,7 +5,11 @@
 
 JSON encoding/decoding functionality for GNU Octave.
 
-This package attempts to provide a set of Matlab-compatible JSON encoding and decoding functions, namely `jsonencode` and `jsondecode`.
+## Goals
+
+JsonStuff attempts to provide a set of Matlab-compatible JSON encoding and decoding functions, namely `jsonencode` and `jsondecode`.
+
+JsonStuff is currently implemented as an Octave package for the `pkg` tool. The goal for JsonStuff is to be eventually merged into core Octave. After that happens, JsonStuff will continue to be maintained as a separate package to provide support for the Octave 4.x and 5.x release lines, at least until the Octave GUI for 5.x+ is fixed for macOS.
 
 ## Installation and usage
 
@@ -30,7 +34,7 @@ pkg load jsonstuff
 
 * Octave 4.4 or newer
 
-JsonStuff runs on Octave 4.4.0 and later. It would be nice to have it work on Octave 4.0.0
+JsonStuff runs on Octave 4.4.1 and later. It would be nice to have it work on Octave 4.0.0
 and later (since Ubuntu 16 Xenial has Octave 4.0 and Ubuntu 18 Bionic has Octave 4.2); maybe we'll do that some day.
 
 JsonStuff works on macOS, Linux, and Windows. (Though our CI is not running on Windows yet.)
