@@ -19,13 +19,13 @@ Texinfo version is the system version on Mac, except in the "Homebrew" environme
 
 I'm assuming Ubuntu stays on the same major/minor version for its packages within a release.
 
-I think we currently require:
+We currently require:
 
-| Package | Version | Why                     |
-| ------- | ------- | ----------------------- |
-| Texinfo | 5.x     | Supports auto-numbering |
-| Octave  | 4.4     | |
-| jsoncpp | ???     | |
+| Package   | Version | Why                     |
+| --------- | ------- | ----------------------- |
+| Texinfo   | 5.x     | Supports auto-numbering |
+| Octave    | 4.4.1   | This is the last version whose macOS GUI works |
+| RapidJSON | 1.1     | This was the current version when we migrated to RapidJSON |
 
 ## Release checklist
 
