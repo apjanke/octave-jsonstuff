@@ -59,7 +59,7 @@ JsonStuff is Free Software.
 
 The JsonStuff code itself is licensed under the GNU GPLv3.
 
-JsonStuff includes a redistribution of the [JsonCpp](https://github.com/open-source-parsers/jsoncpp) library as source code, which is licensed under Public Domain and the MIT License.
+JsonStuff includes a redistribution of the [RapidJSON](https://github.com/Tencent/rapidjson/releases) library as source code, which is licensed under the MIT License.
 
 ## Author and Support
 
