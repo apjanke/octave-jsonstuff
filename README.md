@@ -67,4 +67,4 @@ JsonStuff is created by [Andrew Janke](https://apjanke.net).
 
 Support is available on a best-effort basis via the [JsonStuff GitHub repo](https://github.com/apjanke/octave-jsonstuff). If you have a problem with JsonStuff, post an issue on the Issue Tracker there.
 
-The project's author also hangs out in the `#octave` channel on [freenode IRC](https://freenode.net/). You can ask questions there.
+The project's author also hangs out in the `#octave` channel on [freenode IRC](https://freenode.net/) and the [Octave Maintainers mailing list](https://lists.gnu.org/mailman/listinfo/octave-maintainers). You can ask questions there.
