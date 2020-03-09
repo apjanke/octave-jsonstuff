@@ -238,7 +238,10 @@ decode_result
 decode_json_text (const std::string &json_str) {
   Document document;
   document.Parse(json_str.c_str ());
-  // TODO: Check for parsing and validation errors!
+  if (document.HasParseError ()) {
+    // TODO: Include details about the parsing failure. Use GetParseError().
+    error ("JSON parsing error (no details available; sorry)");
+  }
   return decode_recursive (document);
 }
 
