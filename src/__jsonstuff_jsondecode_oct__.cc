@@ -23,7 +23,10 @@ along with Octave; see the file COPYING.  If not, see
 #include <sstream>
 
 #include <octave/oct.h>
-#include "json/json.h"
+#include "rapidjson/document.h"
+#include "rapidjson/stringbuffer.h"
+
+using namespace rapidjson;
 
 // Inputs:
 //   1: Encoded JSON data as char vector
@@ -36,6 +39,10 @@ public:
   bool is_condensed;
   decode_result (const NDArray &val)
     : value (octave_value (val)), is_condensed (false) {}
+  decode_result (const int64NDArray &val)
+    : value (octave_value (val)), is_condensed (false) {}
+  decode_result (const uint64NDArray &val)
+    : value (octave_value (val)), is_condensed (false) {}
   decode_result (const octave_value &val)
     : value (val), is_condensed (false) {}
   decode_result (const octave_value &val, bool condensed)
@@ -43,14 +50,7 @@ public:
 };
 
 decode_result
-decode_recursive (const Json::Value &jval);
-
-decode_result
-decode_double (const Json::Value &jval) {
-  NDArray out (dim_vector (1, 1));
-  out(0) = jval.asDouble ();
-  return out;
-}
+decode_recursive (const Value &jval);
 
 bool
 equals (const string_vector &a, const string_vector &b) {
@@ -67,39 +67,86 @@ equals (const string_vector &a, const string_vector &b) {
 }
 
 decode_result
-decode_array (const Json::Value &jval) {
+decode_array (const Value &jval) {
+  assert(jval.IsArray ());
+
   // Decode all the elements first, and then decide how to combine them,
   // based on the set of element types.
-  // All JSON numerics are effectively doubles, so we can just ignore the Int/UInt stuff.
-  bool is_all_numeric = true;
-  for (int i = 0; i < jval.size (); i++) {
-  	Json::Value v = jval[i];
-  	if (! (v.isNumeric () || v.isNull ())) {
-      is_all_numeric = false;
+  
+  // Check for homogeneity
+  // Note: JSON nulls must be considered double candidates, but not int64 or uint64
+  bool is_first_element = true;
+  bool is_homogeneous_numeric = true;
+  bool is_all_double = true;
+  bool is_all_int64 = true;
+  bool is_all_uint64 = true;
+  Type type = kNullType;
+  for (const Value& val : jval.GetArray ()) {
+    Type el_type = val.GetType ();
+    if (el_type == kNumberType) {
+      if (!val.IsLosslessDouble ())
+        is_all_double = false;
+      if (!val.IsInt64 ())
+        is_all_int64 = false;
+      if (!val.IsUint64 ())
+        is_all_uint64 = false;
+      if (!(is_all_double || is_all_int64 || is_all_uint64)) {
+        // No longer a candidate for homogeneous numeric
+        is_homogeneous_numeric = false;
+        break;
+      }
+    } else if (el_type == kNullType) {
+      is_all_int64 = is_all_uint64 = false;
+      if (!(is_all_double || is_all_int64 || is_all_uint64)) {
+        // No longer a candidate for homogeneous numeric
+        is_homogeneous_numeric = false;
+        break;
+      }
+    } else {
+      is_homogeneous_numeric = false;
+      is_all_double = is_all_int64 = is_all_uint64 = false;
       break;
-  	}
+    }
   }
-  if (is_all_numeric) {
-    if (jval.empty ()) {
+  // Fast-decode homogeneous numeric arrays
+  if (is_homogeneous_numeric) {
+    int num_elems = jval.Capacity ();
+    if (num_elems == 0) {
       // Special case: empty numerics are [], not 1-by-0
       return NDArray (dim_vector (0, 0));
     } else {
-    	NDArray out (dim_vector (jval.size (), 1));
-    	for (int i = 0; i < jval.size (); i++) {
-    	  if (jval[i].isNull ()) {
-    	  	out(i) = NAN;
-    	  } else {
-    	    out(i) = jval[i].asDouble ();
-    	  }
-    	}
-    	return out;
+      if (is_all_double) {
+        NDArray out (dim_vector (num_elems, 1));
+        for (int i = 0; i < num_elems; i++) {
+          if (jval[i].IsNull ()) {
+            out(i) = NAN;
+          } else {
+            out(i) = jval[i].GetDouble ();
+          }
+        }
+      	return out;
+      } else if (is_all_int64) {
+        int64NDArray out (dim_vector (num_elems, 1));
+        for (int i = 0; i < num_elems; i++) {
+          out(i) = jval[i].GetInt64 ();
+        }
+      	return out;
+      } else if (is_all_uint64) {
+        uint64NDArray out (dim_vector (num_elems, 1));
+        for (int i = 0; i < num_elems; i++) {
+          out(i) = jval[i].GetUint64 ();
+        }
+      	return out;
+      } else {
+        error ("Internal error: detected homogeneous numeric array, but none of the number formats fit.");
+      }
     }
   } else {
     bool is_any_child_condensed = false;
     bool is_all_child_structs = true;
-    int n_children = jval.size();
-  	Cell children (dim_vector (n_children, 1));
-  	for (int i = 0; i < n_children; i++) {
+    int num_children = jval.Capacity ();
+  	Cell children (dim_vector (num_children, 1));
+  	for (int i = 0; i < num_children; i++) {
   	  auto rslt = decode_recursive (jval[i]);
   	  is_all_child_structs &= rslt.value.isstruct ();
   	  is_any_child_condensed |= rslt.is_condensed;
@@ -110,85 +157,96 @@ decode_array (const Json::Value &jval) {
 }
 
 decode_result
-decode_object (const Json::Value &jval) {
+decode_object (const Value &jval) {
   octave_scalar_map s;
-  Json::Value::Members members = jval.getMemberNames ();
-  for (size_t i = 0; i < members.size (); i++) {
-    auto rslt = decode_recursive (jval[members[i]]);
-  	s.assign (members[i], rslt.value);
+  for (Value::ConstMemberIterator it = jval.MemberBegin (); it != jval.MemberEnd (); it++) {
+    std::string name = it->name.GetString ();
+    decode_result oct_val = decode_recursive (it->value);
+    s.assign (name, oct_val.value);
   }
   return octave_value (s);
 }
 
 decode_result
-decode_string (const Json::Value &jval) {
-  return octave_value (jval.asString ());
+decode_string (const Value &jval) {
+  return octave_value (jval.GetString ());
 }
 
 decode_result
-decode_boolean (const Json::Value &jval) {
+decode_boolean (const Value &jval) {
   boolNDArray out = boolNDArray (dim_vector (1, 1));
-  out(0) = jval.asBool ();
+  out(0) = jval.GetBool ();
   return octave_value (out);
 }
 
 decode_result
-decode_null (const Json::Value &jval) {
+decode_null (const Value &jval) {
   NDArray out (dim_vector (0, 0));
   return out;
 }
 
 decode_result
-decode_recursive (const Json::Value &jval) {
-  switch (jval.type ()) {
-  	case Json::nullValue:
-  	  return decode_null (jval);
-  	  break;
-  	case Json::intValue:
-  	  return decode_double (jval);
-  	  break;
-  	case Json::uintValue:
-  	  return decode_double (jval);
-  	  break;
-  	case Json::realValue:
-  	  return decode_double (jval);
-  	  break;
-  	case Json::stringValue:
-  	  return decode_string (jval);
-  	  break;
-  	case Json::booleanValue:
-  	  return decode_boolean (jval);
-  	  break;
-  	case Json::arrayValue:
-  	  return decode_array (jval);
-  	  break;
-  	case Json::objectValue:
-  	  return decode_object (jval);
-  	  break;
+decode_number (const Value &jval) {
+  if (jval.IsLosslessDouble ()) {
+    NDArray out (dim_vector (1, 1));
+    out(0) = jval.GetDouble ();
+    return out;
+  } else if (jval.IsInt64 ()) {
+    int64NDArray out (dim_vector (1, 1));
+    out(0) = jval.GetInt64 ();
+    return out;
+  } else if (jval.IsUint64 ()) {
+    uint64NDArray out (dim_vector (1, 1));
+    out(0) = jval.GetUint64 ();
+    return out;
+  } else {
+    // TODO: Include the JSON text of the number in the error message
+    error ("Internal error: Number was not representable as double, int64, or uint64");
+  }
+}
+
+decode_result
+decode_recursive (const Value &jval) {
+  Type type = jval.GetType ();
+  switch (type) {
+    case kNullType:
+      return decode_null (jval);
+      break;
+    case kNumberType:
+      return decode_number (jval);
+      break;
+    case kStringType:
+      return decode_string (jval);
+      break;
+    case kTrueType:
+    case kFalseType:
+      return decode_boolean (jval);
+      break;
+    case kArrayType:
+      return decode_array (jval);
+      break;
+    case kObjectType:
+      return decode_object (jval);
+      break;
   }
   // This shouldn't happen
+  // TODO: include the type name in the error message
   error ("Internal error: Unimplemented JSON type");
 }
 
 decode_result
 decode_json_text (const std::string &json_str) {
-  Json::CharReaderBuilder builder;
-  Json::Value root;
-  std::istringstream istr (json_str);
-  JSONCPP_STRING errs;
-  bool ok = Json::parseFromStream (builder, istr, &root, &errs);
-  if (ok) {
-    return decode_recursive (root);
-  } else {
-    error ("Invalid JSON data");
-  }
+  Document document;
+  document.Parse(json_str.c_str ());
+  // TODO: Check for parsing and validation errors!
+  return decode_recursive (document);
 }
 
 DEFUN_DLD (__jsonstuff_jsondecode_oct__, args, nargout,
   "Decode JSON text to Octave value\n"
   "\n"
   "-*- texinfo -*-\n"
-  "@deftypefn {Function File} {@var{out} =} __oct_time_binsearch__ (@var{json_text})\n"
+  "@deftypefn {Function File} {@var{out} =} __jsonstuff_jsondecode_oct__ (@var{json_text})\n"
   "\n"
   "Undocumented internal function for jsonstuff package.\n"
   "\n"
