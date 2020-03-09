@@ -20,18 +20,41 @@
 ## @deftypefn  {Function} {@var{value} =} jsondecode (@var{text})
 ## @deftypefnx {Function} {@var{value} =} jsondecode (@var{text})
 ##
-## Encode Octave data as JSON.
+## Decode a JSON document into Octave data.
 ##
-## Encodes the Octave value @code{data} in JSON format and returns the
-## result as a character vector.
+## Decodes a string @var{text} containing a JSON document into a native Octave
+## data structure equivalent.
 ##
-## @code{jsonencode (..., "ConvertInfAndNaN", TF)} controls the encoding of special floating
-## point values NaN, Inf, and -Inf. When @var{ConvertInfAndNaN} is true, then Inf and NaN
-## values are converted to JSON nulls. When @var{ConvertInfAndNaN} is false, then
-## Inf and NaN values are represented as the non-standard JSON values @code{Infinity}
-## and @code{NaN}. The default is true.
+## @var{text} must be a char vector containing a valid JSON document. It is an
+## error if any other type of input is passed, or if the char vector does not contain
+## a valid JSON document.
 ##
-## @xref{jsondecode}
+## The conversion from the JSON data model to native Octave data is performed as
+## follows:
+##
+## @itemize @bullet
+## @item
+## JSON numbers are converted to Octave doubles.
+##
+## @item
+## JSON strings are converted to Octave char vectors.
+##
+## @item
+## JSON objects are converted to scalar Octave structs.
+##
+## @item
+## JSON arrays are converted co Octave cell vectors.
+##
+## @item
+## JSON arrays whose contained elements are all of the same type are "condensed"
+## using a somewhat complicated, currently undocumented algorithm. This condensation
+## process converts arrays containing numbers into numeric arrays (instead of cell
+## arrays), and may convert arrays of arrays into multidimensional arrays (instead
+## of nested cell arrays).
+##
+## @end itemize
+##
+## @xref{jsonencode}
 ##
 ## @end deftypefn
 
