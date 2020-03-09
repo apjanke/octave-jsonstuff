@@ -1,7 +1,6 @@
-JsonStuff Developer Notes
-=========================
+# JsonStuff Developer Notes
 
-# Build and CI
+## Build and CI
 
 ### Environments
 
@@ -28,8 +27,7 @@ I think we currently require:
 | Octave  | 4.4     | |
 | jsoncpp | ???     | |
 
-
-# Release checklist
+## Release checklist
 
 * Double-check the version numbers:
   * in `DESCRIPTION` and `.travis.yml`
