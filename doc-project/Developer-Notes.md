@@ -33,6 +33,7 @@ I think we currently require:
   * in `DESCRIPTION` and `.travis.yml`
 * Update the version in the URL in installation instructions in `README.md`
 * Update the Date in `DESCRIPTION`
+* Commit the above changes with comment 'vX.Y.Z'
 * Run tests
 * `git tag vX.Y.Z`
 * `git push; git push --tags`
