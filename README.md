@@ -18,7 +18,7 @@ JsonStuff is currently implemented as an Octave package for the `pkg` tool. The 
 To get started using or testing this project, install it using Octave's `pkg` function:
 
 ```octave
-pkg install https://github.com/apjanke/octave-jsonstuff/releases/download/v0.3.2/jsonstuff-0.3.2.tar.gz
+pkg install https://github.com/apjanke/octave-jsonstuff/releases/download/v0.3.3/jsonstuff-0.3.3.tar.gz
 pkg load jsonstuff
 ```
 
