@@ -68,7 +68,7 @@ equals (const string_vector &a, const string_vector &b) {
 
 decode_result
 decode_array (const Value &jval) {
-  assert(jval.IsArray ());
+  assert (jval.IsArray ());
 
   // Decode all the elements first, and then decide how to combine them,
   // based on the set of element types.
@@ -237,7 +237,7 @@ decode_recursive (const Value &jval) {
 decode_result
 decode_json_text (const std::string &json_str) {
   Document document;
-  document.Parse(json_str.c_str ());
+  document.Parse (json_str.c_str ());
   if (document.HasParseError ()) {
     // TODO: Include details about the parsing failure. Use GetParseError().
     error ("JSON parsing error (no details available; sorry)");
