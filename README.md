@@ -11,6 +11,10 @@ JsonStuff attempts to provide a set of Matlab-compatible JSON encoding and decod
 
 JsonStuff is currently implemented as an Octave package for the `pkg` tool. The goal for JsonStuff is to be eventually merged into core Octave. After that happens, JsonStuff will continue to be maintained as a separate package to provide support for the Octave 4.x and 5.x release lines, at least until the Octave GUI for 5.x+ is fixed for macOS.
 
+## Soon to be Legacy
+
+In summer 2020, core Octave implemented jsondecode and jsonencode, and these will be coming out in Octave 7.x. So JsonStuff is soon to be a legacy package, useful only for older versions of Octave. At that point I'm going to put it in "basic maintenance only" mode and stop development on it in favor of contributing to the core Octave implementations.
+
 ## Installation and usage
 
 ### Quick start
